@@ -3,17 +3,20 @@ Main SRC file for A1
 Joshua Ducharme-Baribeau
 */
 
-#include <stdio.h>
+// not needed here #include <stdio.h>
+#include "cryptoMagic.h"
 
-
-int main(void)
+//main only calls the run function
+int main(int argc, char *argv[])
 {
-	FILE* p_file = NULL;
-	
-	char[] file_name;
-	
-	int line_counter = 0;
-	
-	
-	p_file = 
+	//if there is only one argument (not including the command), i.e. only a file name
+	if (argc == 2)
+	{
+		run();
+	}
+	else if
+	{
+		run()
+	}
+	else if
 }
