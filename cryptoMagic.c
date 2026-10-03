@@ -3,20 +3,32 @@ Main SRC file for A1
 Joshua Ducharme-Baribeau
 */
 
-// not needed here #include <stdio.h>
-#include "cryptoMagic.h"
+#include <stdio.h>
+
+//#include "cryptoMagic.h"
+
+#include "run.h"
+#include "userInterface.h"
 
 //main only calls the run function
 int main(int argc, char *argv[])
 {
-	//if there is only one argument (not including the command), i.e. only a file name
+	//if there are two arguments (including command), i.e. only a file name as an additional argument
 	if (argc == 2)
 	{
-		run();
+		run("-encrypt", argv[1]);
 	}
-	else if
+	//if there are 3 arguments and the 2nd argument is -encrypt or -decrypt
+	else if((argc == 3) && (argv[1] == "-encrypt" || argv[1] == "-decrypt"))
 	{
-		run()
+		run(argv[1], argv[2])
 	}
-	else if
+	//too many arguments or insufficient arguments
+	else
+	{
+		//display an error message using the interface //Note, consider using a variable to hold this long char array
+		displayError("Incorrect use of cryptoMagic. Please use the command as follows:\nTo encrypt:\"cryptoMagic -encrypt fileToEncrypt.txt\" or \"cryptoMagic fileToEncrypt.txt\" \nTo decrypt:\"cryptoMagic -decrypt fileToDecrypt.crp\"");
+	}
+
+	return(0);
 }
