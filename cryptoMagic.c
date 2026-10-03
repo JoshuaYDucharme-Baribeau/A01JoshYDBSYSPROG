@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	else
 	{
 		//display an error message using the interface //Note, consider using a variable to hold this long char array
-		displayError("Incorrect use of cryptoMagic. Please use the command as follows:\nTo encrypt:\"cryptoMagic -encrypt fileToEncrypt.txt\" or \"cryptoMagic fileToEncrypt.txt\" \nTo decrypt:\"cryptoMagic -decrypt fileToDecrypt.crp\"");
+		displayError("Incorrect use of cryptoMagic. Please use the command as follows:\nTo encrypt: \"cryptoMagic -encrypt fileToEncrypt.txt\" or \"cryptoMagic fileToEncrypt.txt\" \nTo decrypt: \"cryptoMagic -decrypt fileToDecrypt.crp\"\n");
 	}
 
 	return(0);

@@ -30,3 +30,7 @@ bool checkFileExistence(char *fileName)
 
 	return existence;
 }
+
+//function to remove the file extension if any and replace it with the correct extension as required
+
+//function to write the new encrypted or decrypted file
