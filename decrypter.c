@@ -15,3 +15,7 @@ char* decryption(char *fileName)
 {
 	return "success";
 }
+
+//check for tab or cr or line
+//func decrypt pair of hexes to actual char
+

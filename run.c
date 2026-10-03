@@ -21,6 +21,7 @@ int run(char *runMode, char *fileName)
 		if(strcmp(runMode, "-encrypt") == 0)
 		{
 			//run encrypter
+			//encrypted characters[] = readForEncryption(fileName);
 			printf("status of encryption: %s\n", encryption(fileName));
 		}
 		else if(strcmp(runMode, "-decrypt") == 0)

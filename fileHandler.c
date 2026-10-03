@@ -4,12 +4,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "fileHandler.h"
 
-//#include "encrypter.h"
+#include "encrypter.h"
 //#include "decrypter.h"
 #include "userInterface.h"
+
+#define MAX_LINE_SIZE 256
 
 //check that file exists
 bool checkFileExistence(char *fileName)
@@ -25,11 +28,69 @@ bool checkFileExistence(char *fileName)
 	{
 		fclose(p_file);
 		existence = true;
+	}
+	return existence;
+}
+
+//open and read a file for encryption
+char* readForEncryption(char *fileName) 
+{
+	FILE* p_file = fopen(fileName, "r");
+
+	// Determine the file size
+	fseek(p_file, 0, SEEK_END);
+	long file_size = ftell(p_file);
+	rewind(p_file);//brings the file pointer back to the start
+
+	//holds the encrypted text, which is the size of the file times 2
+	char* outChar = malloc(file_size * 2 + 1); //allocate double chars plus the null temrinator
+	
+	outChar[0] = '\0'; //inistialize the char array as empty
+
+	char line[MAX_LINE_SIZE] = {0};
+	long index_of_outChar = 0;
+	char term_buffer[4]; //a buffer large enough to hold up to 3 characters and a null terminator
+	
+
+	while(fgets(line, sizeof(line), p_file) != NULL)
+	{
+
+		for(int i = 0; line[i] != '\0'; i++)
+		{
+			int cr_indicator = encryptChar(line[i], term_buffer);
+			
+			//this loop allows the encrypted characters to be stored, regardless if there are 2 characters (a hex value or TT) or only a CR (/n or /r)
+			for (int j = 0; j < cr_indicator; j++)
+			{
+				outChar[index_of_outChar++] = term_buffer[j];
+			}
+
+		}
 		
 	}
 
-	return existence;
+	encrypted[index_of_encrypted] = '\0'; //ends the string of encrypted characters with a null terminator
+	fclose(p_file);
+	return outChar;
 }
+
+
+
+
+		//get ascii code from char
+		//if ascii 9 
+			// then output "TT"
+		//else if ascii is a carriage return
+			// don't modify and skip to the next line (continue)
+		//else
+			// ascii - 16
+			//if ((ascii) < 32)
+				// ascii - 32
+				// ascii + 144
+			//no else
+			// 
+		// func apply encryption to the number
+		// 
 
 //function to remove the file extension if any and replace it with the correct extension as required
 

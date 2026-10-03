@@ -2,6 +2,6 @@
 #define ENCRYPTER_H
 
 
-char* encryption(char *fileName);
+int encryptChar(char unencrypted_char, char *term_buffer);
 
 #endif
