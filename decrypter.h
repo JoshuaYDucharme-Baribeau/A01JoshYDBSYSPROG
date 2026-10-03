@@ -1,3 +1,7 @@
-/*HEADER FILE*/
+#ifndef DECRYPTER_H
+#define DECRYPTER_H
 
-char[8] decryption(char[] fileName);
+
+char* decryption(char *fileName);
+
+#endif

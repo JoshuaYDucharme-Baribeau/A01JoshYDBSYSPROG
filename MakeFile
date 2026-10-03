@@ -5,8 +5,8 @@ CFLAGS = -Wall -Wextra -std=c11
 
 TARGETPROGRAM = cryptoMagic
 
-SOURCEFILES = cryptoMagic.c run.c fileHandler.c userInterface.c encrypter.c decrypter.c
-OBJECTFILES = cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
+#SOURCEFILES = cryptoMagic.c run.c fileHandler.c userInterface.c encrypter.c decrypter.c
+#OBJECTFILES = cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
 
 
 
@@ -29,7 +29,7 @@ fileHandler.o: fileHandler.c fileHandler.h userInterface.h
 	$(CCOMPILER) $(CFLAGS) -c fileHandler.c -o fileHandler.o
 
 userInterface.o: userInterface.c userInterface.h
-	$(CCOMPILER) $(CFLAGS) -c fileHandler.c -o fileHandler.o
+	$(CCOMPILER) $(CFLAGS) -c userInterface.c -o userInterface.o
 
 encrypter.o: encrypter.c encrypter.h
 	$(CCOMPILER) $(CFLAGS) -c encrypter.c -o encrypter.o

@@ -11,9 +11,7 @@
 
 
 //stub
-char[8] encryption(char *fileName) 
+char* encryption(char *fileName) 
 {
-	char[8] result;
-	strcmp(result, "success");
-	return result;
+	return "success";
 }

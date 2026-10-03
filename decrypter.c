@@ -11,9 +11,7 @@
 
 
 //stub
-char[8] decryption(char[] fileName)
+char* decryption(char *fileName)
 {
-	char[8] result;
-	result = "success";
-	return result;
+	return "success";
 }
