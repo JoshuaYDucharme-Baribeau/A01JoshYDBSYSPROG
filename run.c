@@ -16,7 +16,7 @@ int run(char *runMode, char *fileName)
 {
 	//verify that the file exists
 
-	if(checkFileExistence(*fileName))
+	if(checkFileExistence(fileName))
 	{
 		if(strcmp(runMode, "-encrypt") == 0)
 		{
