@@ -15,9 +15,8 @@
 bool checkFileExistence(char *fileName)
 {
 	bool existence = false;
-	FILE* p_file = NULL;
+	FILE* p_file = fopen(fileName, "r"); 
 
-	p_file = fopen(fileName, "r");
 	if(p_file == NULL)
 	{
 		existence = false;
