@@ -1,0 +1,44 @@
+#MakeFile for Assignment 1 JoshYDB
+
+CCOMPILER = gcc
+CFLAGS = -Wall -Wextra -std=c11
+
+TARGETPROGRAM = cryptoMagic
+
+SOURCEFILES = cryptoMagic.c run.c fileHandler.c userInterface.c encrypter.c decrypter.c
+OBJECTFILES = cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
+
+
+
+#the command that will run to compile and link all the object files
+
+cryptoMagic: cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
+	$(CCOMPILER) $(CFLAGS) -o cryptoMagic cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
+
+
+
+#actual compilation rules
+
+cryptoMagic.o: cryptoMagic.c run.h userInterface.h
+	$(CCOMPILER) $(CFLAGS) -c cryptoMagic.c -o cryptoMagic.o
+
+run.o: run.c run.h userInterface.h fileHandler.h encrypter.h decrypter.h
+	$(CCOMPILER) $(CFLAGS) -c run.c -o run.o
+
+fileHandler.o: fileHandler.c fileHandler.h userInterface.h
+	$(CCOMPILER) $(CFLAGS) -c fileHandler.c -o fileHandler.o
+
+userInterface.o: userInterface.c userInterface.h
+	$(CCOMPILER) $(CFLAGS) -c fileHandler.c -o fileHandler.o
+
+encrypter.o: encrypter.c encrypter.h
+	$(CCOMPILER) $(CFLAGS) -c encrypter.c -o encrypter.o
+
+decrypter.o: decrypter.c decrypter.h
+	$(CCOMPILER) $(CFLAGS) -c decrypter.c -o decrypter.o
+
+
+
+clean:
+	rm -f cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
+	rm -f cryptoMagic

@@ -14,26 +14,24 @@
 void run(char[9] runMode, char[] fileName)
 {
 	//verify that the file exists
-	FILE* p_file = NULL;
 
-	p_file = fopen(fileName, "r");
-	
-	if(p_file == NULL)
+	if(checkFileExistence(fileName))
 	{
-		displayError("The file name you have entered does not exist in the specified directory or cannot be read.");
-	}
-	else {
-
 		if(argv[1] == "-encrypt") 
 		{
 			//run encrypter
-
+			printf("status of encryption: ", encryption(fileName));
 		}
 		else if(argv[1] == "-decrypt")
 		{
 			//run decrypter
-
+			printf("status of decryption: ", decryption(fileName));
+			//decryption(fileName);
 		}
+	}
+	else {
+		//should try to get more specific error handling, but low priority
+		displayError("The file name you have entered does not exist in the specified directory or cannot be read.");
 	}
 
 }
