@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "fileHandler.h"
 
@@ -11,19 +12,22 @@
 #include "userInterface.h"
 
 //check that file exists
-bool checkFileExistence(char[] fileName)
+bool checkFileExistence(char *fileName)
 {
-	bool existence = NULL;
+	bool existence = false;
 	FILE* p_file = NULL;
 
 	p_file = fopen(fileName, "r");
-	if(p_file == NULL) 
+	if(p_file == NULL)
 	{
 		existence = false;
 	}
 	else
 	{
+		fclose(p_file);
 		existence = true;
+		
 	}
+
 	return existence;
 }

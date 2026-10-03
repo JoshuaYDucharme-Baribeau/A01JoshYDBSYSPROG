@@ -7,7 +7,7 @@
 #include "userInterface.h"
 
 //functions
-void displayError(char[] errorMessage)
+void displayError(char *errorMessage)
 {
 	printf("An error occured:\n");
 	printf("%s", errorMessage);

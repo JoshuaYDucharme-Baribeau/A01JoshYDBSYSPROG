@@ -1,3 +1,6 @@
-/*HEADER FILE*/
+#ifndef RUN_H
+#define RUN_H
 
-void run(char[9] runMode, char[] fileName);
+int run(char *runMode, char *fileName);
+
+#endif

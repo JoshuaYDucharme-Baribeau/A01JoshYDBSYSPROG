@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	//if there are 3 arguments and the 2nd argument is -encrypt or -decrypt
 	else if((argc == 3) && (argv[1] == "-encrypt" || argv[1] == "-decrypt"))
 	{
-		run(argv[1], argv[2])
+		run(argv[1], argv[2]);
 	}
 	//too many arguments or insufficient arguments
 	else
