@@ -21,27 +21,27 @@ OBJECTS = $(OBJ)/cryptoMagic.o $(OBJ)/run.o $(OBJ)/fileHandler.o $(OBJ)/userInte
 
 #the command that will run to compile and link all the object files, using the variables declared above
 $(TARGETPROGRAM): $(OBJECTS)
-    $(CCOMPILER) $(CFLAGS) -o $(TARGETPROGRAM) $(OBJECTS)
+	$(CCOMPILER) $(CFLAGS) -o $(TARGETPROGRAM) $(OBJECTS)
 
 #actual compilation rules
 $(OBJ)/cryptoMagic.o: $(SRC)/cryptoMagic.c $(INC)/run.h $(INC)/userInterface.h
-    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/cryptoMagic.c -o $(OBJ)/cryptoMagic.o
+	$(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/cryptoMagic.c -o $(OBJ)/cryptoMagic.o
 
 $(OBJ)/run.o: $(SRC)/run.c $(INC)/run.h $(INC)/userInterface.h $(INC)/fileHandler.h $(INC)/encrypter.h $(INC)/decrypter.h
-    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/run.c -o $(OBJ)/run.o
+	$(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/run.c -o $(OBJ)/run.o
 
 $(OBJ)/fileHandler.o: $(SRC)/fileHandler.c $(INC)/fileHandler.h $(INC)/encrypter.h $(INC)/decrypter.h $(INC)/userInterface.h
-    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/fileHandler.c -o $(OBJ)/fileHandler.o
+	$(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/fileHandler.c -o $(OBJ)/fileHandler.o
 
 $(OBJ)/userInterface.o: $(SRC)/userInterface.c $(INC)/userInterface.h
-    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/userInterface.c -o $(OBJ)/userInterface.o
+	$(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/userInterface.c -o $(OBJ)/userInterface.o
 
 $(OBJ)/encrypter.o: $(SRC)/encrypter.c $(INC)/encrypter.h
-    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/encrypter.c -o $(OBJ)/encrypter.o
+	$(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/encrypter.c -o $(OBJ)/encrypter.o
 
 $(OBJ)/decrypter.o: $(SRC)/decrypter.c $(INC)/decrypter.h
-    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/decrypter.c -o $(OBJ)/decrypter.o
+	$(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/decrypter.c -o $(OBJ)/decrypter.o
 
 clean:
-    rm -f $(OBJ)/*.o
-    rm -f $(TARGETPROGRAM)
+	rm -f $(OBJ)/*.o
+	rm -f $(TARGETPROGRAM)
