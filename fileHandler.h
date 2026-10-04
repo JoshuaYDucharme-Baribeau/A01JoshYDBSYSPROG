@@ -5,6 +5,10 @@
 
 bool checkFileExistence(char *fileName);
 
-//FILE* fopen(char **fileName, char *access_mode);
+char* readForEncryption(char* fileName);
+
+void writeEncryption(char* fileName, char* outChar);
+
+char* newFileName(char* fileName)
 
 #endif

@@ -25,7 +25,7 @@ cryptoMagic.o: cryptoMagic.c run.h userInterface.h
 run.o: run.c run.h userInterface.h fileHandler.h encrypter.h decrypter.h
 	$(CCOMPILER) $(CFLAGS) -c run.c -o run.o
 
-fileHandler.o: fileHandler.c fileHandler.h userInterface.h
+fileHandler.o: fileHandler.c fileHandler.h encrypter.h userInterface.h
 	$(CCOMPILER) $(CFLAGS) -c fileHandler.c -o fileHandler.o
 
 userInterface.o: userInterface.c userInterface.h
