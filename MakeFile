@@ -44,5 +44,5 @@ $(OBJ)/decrypter.o: $(SRC)/decrypter.c $(INC)/decrypter.h
 
 
 clean:
-	rm -f cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
-	rm -f cryptoMagic
+    rm -f $(OBJ)/*.o
+    rm -f $(TARGETPROGRAM)
