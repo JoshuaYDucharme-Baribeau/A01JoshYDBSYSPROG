@@ -1,12 +1,12 @@
 #MakeFile for Assignment 1 JoshYDB
 
 CCOMPILER = gcc
-CFLAGS = -Wall -Wextra -std=c11
+CFLAGS = -std=c11
 
 TARGETPROGRAM = cryptoMagic
 
-#SOURCEFILES = cryptoMagic.c run.c fileHandler.c userInterface.c encrypter.c decrypter.c
-#OBJECTFILES = cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
+#list of source files - cryptoMagic.c run.c fileHandler.c userInterface.c encrypter.c decrypter.c
+#list of onj files - cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
 
 
 
