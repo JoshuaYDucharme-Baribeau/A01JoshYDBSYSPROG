@@ -2,6 +2,7 @@
 #define DECRYPTER_H
 
 
-char* decryption(char *fileName);
+int decryptChar(char* encrypted_chars, int pointer_pos, char* output_char);
+
 
 #endif

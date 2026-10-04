@@ -1,5 +1,5 @@
-/*file Handling logic*/
-//The file handler shouldn't be calling much else other than UI for confirmations (subject to change)
+//file Handling logic
+//
 
 #include <stdio.h>
 #include <string.h>
@@ -9,7 +9,7 @@
 #include "fileHandler.h"
 
 #include "encrypter.h"
-//#include "decrypter.h"
+#include "decrypter.h"
 #include "userInterface.h"
 
 #define MAX_LINE_SIZE 256
@@ -33,7 +33,7 @@ bool checkFileExistence(char *fileName)
 }
 
 //open and read a file for encryption
-char* readForEncryption(char *fileName) 
+char* readFile(char *fileName, int crypto_mode) 
 {
 	FILE* p_file = fopen(fileName, "r");
 	if (!p_file) 
@@ -57,8 +57,6 @@ char* readForEncryption(char *fileName)
 	}
 
 
-	//outChar[0] = '\0'; //inistialize the char array as empty
-
 	char line[MAX_LINE_SIZE] = {0};
 	long index_of_outChar = 0;
 	char term_buffer[4]; //a buffer large enough to hold up to 3 characters and a null terminator
@@ -66,19 +64,34 @@ char* readForEncryption(char *fileName)
 
 	while(fgets(line, sizeof(line), p_file) != NULL)
 	{
-
-		for(int i = 0; line[i] != '\0'; i++)
+		if(crypto_mode == 1)
 		{
-			int enc_output_length = encryptChar(line[i], term_buffer);
-			
-			//this loop allows the encrypted characters to be stored, regardless if there are 2 characters (a hex value or TT) or only a CR (/n or /r)
-			for (int j = 0; j < enc_output_length; j++)
+			for (int i = 0; line[i] != '\0'; i++)
 			{
-				outChar[index_of_outChar++] = term_buffer[j];
-			}
+				int enc_output_length = encryptChar(line[i], term_buffer);
 
+				//this loop allows the encrypted characters to be stored, regardless if there are 2 characters (a hex value or TT) or only a CR (/n or /r)
+				for (int j = 0; j < enc_output_length; j++)
+				{
+					outChar[index_of_outChar++] = term_buffer[j];
+				}
+
+			}
 		}
-		
+		//otherwise decrypt:
+		else
+		{
+			for (int i = 0; line[i] != '\0';)
+			{
+				int chars_decrypted = decryptChar(line, i, term_buffer);
+
+				outChar[index_of_outChar++] = term_buffer[0];
+
+				//move the pointer of the file reader by the amount of chars decrypted
+				i += chars_decrypted;
+			}
+		}
+
 	}
 
 	outChar[index_of_outChar] = '\0'; //ends the string of encrypted characters with a null terminator
@@ -135,28 +148,58 @@ char* newFileName(char* fileName)
 		output_name[len_without_ext] = '\0';
 
 		strcat(output_name, ".crp");
-		return output_name;
 
+		return output_name;
 	}
 
 }
 
+void writeDecrypted(char* fileName, char* outChar)
+{
+	char* output_name = newDecryptedFileName(fileName);
+	
+	FILE* p_file = fopen(output_name, "w");
+	if (!p_file)
+	{
+		displayError("error when writing the decrypted data to a file.");
+		free(output_name);
+		return;
+	}
 
-		//get ascii code from char
-		//if ascii 9 
-			// then output "TT"
-		//else if ascii is a carriage return
-			// don't modify and skip to the next line (continue)
-		//else
-			// ascii - 16
-			//if ((ascii) < 32)
-				// ascii - 32
-				// ascii + 144
-			//no else
-			// 
-		// func apply encryption to the number
-		// 
+	fputs(outChar, p_file);
 
-//function to remove the file extension if any and replace it with the correct extension as required
+	fclose(p_file);
+	free(output_name);
 
-//function to write the new encrypted or decrypted file
+}
+
+char* newDecryptedFileName(char* fileName)
+{
+	char* period = strrchr(fileName, '.');
+	//size_t name_length = strlen(fileName);
+	size_t len_without_ext;
+	
+	//if there's an extension and it is .crp
+	if (period && strcmp(period, ".crp") == 0)
+	{
+		len_without_ext = period - fileName;
+	}
+	else 
+	{
+		len_without_ext = strlen(fileName);
+	}
+
+	char* output_name = malloc(len_without_ext + 5);
+	if (!output_name)
+	{
+		displayError("error allocating memory for the name of the decrypted file");
+		return NULL;
+	}
+
+	strncpy(output_name, fileName, len_without_ext);
+	output_name[len_without_ext] = '\0';
+
+	strcat(output_name, ".txt");
+	return output_name;
+}
+
