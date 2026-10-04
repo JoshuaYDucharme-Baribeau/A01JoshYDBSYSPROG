@@ -11,8 +11,8 @@ void writeEncryption(char* fileName, char* outChar);
 
 char* newFileName(char* fileName);
 
-char* newDecryptedFileName(char* fileName)
+char* newDecryptedFileName(char* fileName);
 
-void writeDecrypted(char* fileName, char* outChar)
+void writeDecrypted(char* fileName, char* outChar);
 
 #endif
