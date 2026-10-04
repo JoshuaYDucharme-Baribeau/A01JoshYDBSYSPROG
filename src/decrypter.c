@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "decrypter.h"
+#include "../inc/decrypter.h"
 
 int decryptChar(char *encrypted_chars, int pointer_pos, char* output_char)
 {

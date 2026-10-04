@@ -6,12 +6,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "run.h"
+#include "../inc/run.h"
 
-#include "userInterface.h"
-#include "fileHandler.h"
-#include "encrypter.h"
-#include "decrypter.h"
+#include "../inc/userInterface.h"
+#include "../inc/fileHandler.h"
+#include "../inc/encrypter.h"
+#include "../inc/decrypter.h"
 
 int run(char *runMode, char *fileName)
 {

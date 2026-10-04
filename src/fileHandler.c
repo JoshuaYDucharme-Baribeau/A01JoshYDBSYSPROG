@@ -6,11 +6,11 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "fileHandler.h"
+#include "../inc/fileHandler.h"
 
-#include "encrypter.h"
-#include "decrypter.h"
-#include "userInterface.h"
+#include "../inc/encrypter.h"
+#include "../inc/decrypter.h"
+#include "../inc/userInterface.h"
 
 #define MAX_LINE_SIZE 256
 

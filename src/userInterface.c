@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "userInterface.h"
+#include "../inc/userInterface.h"
 
 //functions
 void displayError(char *errorMessage)

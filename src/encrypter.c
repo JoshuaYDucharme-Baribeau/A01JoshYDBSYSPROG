@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "encrypter.h"
+#include "../inc/encrypter.h"
 
 
 

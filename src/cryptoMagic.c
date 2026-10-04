@@ -8,8 +8,8 @@ Joshua Ducharme-Baribeau
 
 //#include "cryptoMagic.h"
 
-#include "run.h"
-#include "userInterface.h"
+#include "../inc/run.h"
+#include "../inc/userInterface.h"
 
 //main only calls the run function
 int main(int argc, char *argv[])

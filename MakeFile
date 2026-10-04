@@ -3,40 +3,44 @@
 CCOMPILER = gcc
 CFLAGS = -std=c11
 
-TARGETPROGRAM = cryptoMagic
+#variables that can be used to easily change the filepaths in case of moving things around or updating filepaths
+SRC = src
+INC = inc
+OBJ = obj
+BIN = bin
+
+TARGETPROGRAM = $(BIN)/cryptoMagic
 
 #list of source files - cryptoMagic.c run.c fileHandler.c userInterface.c encrypter.c decrypter.c
 #list of onj files - cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
 
 
-
-#the command that will run to compile and link all the object files
-
-cryptoMagic: cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
-	$(CCOMPILER) $(CFLAGS) -o cryptoMagic cryptoMagic.o run.o fileHandler.o userInterface.o encrypter.o decrypter.o
+OBJECTS = $(OBJ)/cryptoMagic.o $(OBJ)/run.o $(OBJ)/fileHandler.o $(OBJ)/userInterface.o $(OBJ)/encrypter.o $(OBJ)/decrypter.o 
 
 
+
+#the command that will run to compile and link all the object files, using the variables declared above
+$(TARGETPROGRAM): $(OBJECTS)
+    $(CCOMPILER) $(CFLAGS) -o $(TARGETPROGRAM) $(OBJECTS)
 
 #actual compilation rules
+$(OBJ)/cryptoMagic.o: $(SRC)/cryptoMagic.c $(INC)/run.h $(INC)/userInterface.h
+    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/cryptoMagic.c -o $(OBJ)/cryptoMagic.o
 
-cryptoMagic.o: cryptoMagic.c run.h userInterface.h
-	$(CCOMPILER) $(CFLAGS) -c cryptoMagic.c -o cryptoMagic.o
+$(OBJ)/run.o: $(SRC)/run.c $(INC)/run.h $(INC)/userInterface.h $(INC)/fileHandler.h $(INC)/encrypter.h $(INC)/decrypter.h
+    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/run.c -o $(OBJ)/run.o
 
-run.o: run.c run.h userInterface.h fileHandler.h encrypter.h decrypter.h
-	$(CCOMPILER) $(CFLAGS) -c run.c -o run.o
+$(OBJ)/fileHandler.o: $(SRC)/fileHandler.c $(INC)/fileHandler.h $(INC)/encrypter.h $(INC)/decrypter.h $(INC)/userInterface.h
+    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/fileHandler.c -o $(OBJ)/fileHandler.o
 
-fileHandler.o: fileHandler.c fileHandler.h encrypter.h decrypter.h userInterface.h
-	$(CCOMPILER) $(CFLAGS) -c fileHandler.c -o fileHandler.o
+$(OBJ)/userInterface.o: $(SRC)/userInterface.c $(INC)/userInterface.h
+    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/userInterface.c -o $(OBJ)/userInterface.o
 
-userInterface.o: userInterface.c userInterface.h
-	$(CCOMPILER) $(CFLAGS) -c userInterface.c -o userInterface.o
+$(OBJ)/encrypter.o: $(SRC)/encrypter.c $(INC)/encrypter.h
+    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/encrypter.c -o $(OBJ)/encrypter.o
 
-encrypter.o: encrypter.c encrypter.h
-	$(CCOMPILER) $(CFLAGS) -c encrypter.c -o encrypter.o
-
-decrypter.o: decrypter.c decrypter.h
-	$(CCOMPILER) $(CFLAGS) -c decrypter.c -o decrypter.o
-
+$(OBJ)/decrypter.o: $(SRC)/decrypter.c $(INC)/decrypter.h
+    $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/decrypter.c -o $(OBJ)/decrypter.o
 
 
 clean:
