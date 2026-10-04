@@ -36,6 +36,11 @@ bool checkFileExistence(char *fileName)
 char* readForEncryption(char *fileName) 
 {
 	FILE* p_file = fopen(fileName, "r");
+	if (!p_file) 
+	{
+		displayError("Error opening file.\n");
+		return NULL;
+	}
 
 	// Determine the file size
 	fseek(p_file, 0, SEEK_END);
@@ -44,8 +49,15 @@ char* readForEncryption(char *fileName)
 
 	//holds the encrypted text, which is the size of the file times 2
 	char* outChar = malloc(file_size * 2 + 1); //allocate double chars plus the null temrinator
-	
-	outChar[0] = '\0'; //inistialize the char array as empty
+	if (!outChar)
+	{
+		fclose(p_file);
+		displayError("Failed to allocate memory.\n");
+		return NULL;
+	}
+
+
+	//outChar[0] = '\0'; //inistialize the char array as empty
 
 	char line[MAX_LINE_SIZE] = {0};
 	long index_of_outChar = 0;
@@ -57,10 +69,10 @@ char* readForEncryption(char *fileName)
 
 		for(int i = 0; line[i] != '\0'; i++)
 		{
-			int cr_indicator = encryptChar(line[i], term_buffer);
+			int enc_output_length = encryptChar(line[i], term_buffer);
 			
 			//this loop allows the encrypted characters to be stored, regardless if there are 2 characters (a hex value or TT) or only a CR (/n or /r)
-			for (int j = 0; j < cr_indicator; j++)
+			for (int j = 0; j < enc_output_length; j++)
 			{
 				outChar[index_of_outChar++] = term_buffer[j];
 			}
@@ -69,12 +81,65 @@ char* readForEncryption(char *fileName)
 		
 	}
 
-	encrypted[index_of_encrypted] = '\0'; //ends the string of encrypted characters with a null terminator
+	outChar[index_of_outChar] = '\0'; //ends the string of encrypted characters with a null terminator
 	fclose(p_file);
 	return outChar;
 }
 
+//write to an encrypted file
 
+void writeEncryption(char* fileName, char* outChar) 
+{
+	FILE* p_file = fopen(output_name, "w");
+	char *output_name = newFileName(fileName);
+	if (!p_file)
+	{
+		displayError("Error opening file.\n");
+		return;
+	}
+	fputs(outChar, p_file);
+
+	free(output_name);
+	fclose(p_file);
+}
+
+char* newFileName(char* fileName) 
+{
+	size_t name_length = strlen(fileName);
+	char* period = strrchr(fileName, '.');
+
+	if (!period)
+	{
+		char* output_name = malloc(name_length + 5);
+		if (!output_name)
+		{
+			displayError("error allocating memory for outputname");
+			return NULL;
+		}
+		strcpy(output_name, fileName);
+		strcat(output_name, ".crp");
+		return output_name;
+	}
+	else
+	{
+		size_t len_without_ext = period - fileName;
+
+		char* output_name = malloc(len_without_ext + 5);
+		if (!output_name)
+		{
+			displayError("error allocating memory for outputname");
+			return NULL;
+		}
+
+		strncpy(output_name, fileName, len_without_ext);
+		output_name[len_without_ext] = '\0';
+
+		strcat(output_name, ".crp");
+		return output_name;
+
+	}
+
+}
 
 
 		//get ascii code from char

@@ -11,9 +11,9 @@
 
 
 //stub
-int encryptChar(char unencrypted_char, char *term_buffer ) 
+int encryptChar(char unencrypted_char, char *term_buffer) 
 {
-	int length_indicator = 1;
+	int length_indicator = 0;
 	int modded_ascii = (unsigned char)unencrypted_char;
 
 	if(modded_ascii == 13 || modded_ascii == 10)
@@ -43,13 +43,3 @@ int encryptChar(char unencrypted_char, char *term_buffer )
 	return length_indicator;
 	//return "success";
 }
-
-//get the ascii code and return 
-//int find_ascii(char unencrypted_char) 
-//{
-//	
-//}
-
-
-//func apply encrypt
-	//convert outchar(a decimal int) to hexadecimal
