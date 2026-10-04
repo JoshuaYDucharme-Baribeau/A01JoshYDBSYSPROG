@@ -90,8 +90,8 @@ char* readForEncryption(char *fileName)
 
 void writeEncryption(char* fileName, char* outChar) 
 {
-	FILE* p_file = fopen(output_name, "w");
 	char *output_name = newFileName(fileName);
+	FILE* p_file = fopen(output_name, "w");
 	if (!p_file)
 	{
 		displayError("Error opening file.\n");

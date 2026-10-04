@@ -9,6 +9,6 @@ char* readForEncryption(char* fileName);
 
 void writeEncryption(char* fileName, char* outChar);
 
-char* newFileName(char* fileName)
+char* newFileName(char* fileName);
 
 #endif

@@ -24,13 +24,14 @@ int run(char *runMode, char *fileName)
 			outChar = readForEncryption(fileName);
 			if (!outChar)
 			{
-				diplayError("Something went wong while encrypting");
+				displayError("Something went wong while encrypting");
 				return 1;
 			}
 			
 			//write the encrypted file
 			writeEncryption(fileName, outChar);
 			
+			free(outChar);
 			//printf("status of encryption: %s\n", encryption(fileName));
 		}
 		else if(strcmp(runMode, "-decrypt") == 0)
@@ -40,11 +41,11 @@ int run(char *runMode, char *fileName)
 			//decryption(fileName);
 		}
 	}
-	else {
+	else 
+	{
 		//should try to get more specific error handling, but low priority
 		displayError("The file name you have entered does not exist in the specified directory or cannot be read.\n");
 	}
-	free(outChar);
 
 	return (0);
 
