@@ -42,7 +42,6 @@ $(OBJ)/encrypter.o: $(SRC)/encrypter.c $(INC)/encrypter.h
 $(OBJ)/decrypter.o: $(SRC)/decrypter.c $(INC)/decrypter.h
     $(CCOMPILER) $(CFLAGS) -I$(INC) -c $(SRC)/decrypter.c -o $(OBJ)/decrypter.o
 
-
 clean:
     rm -f $(OBJ)/*.o
     rm -f $(TARGETPROGRAM)
